@@ -17,7 +17,7 @@ def summarize_common(
     system_prompt: str,
     parts: list[types.Part],
     analysis_mode: str = "Quick Scan",
-    model_name: str = "gemini-1.5-pro-latest"
+    model_name: str = "gemini-2.0-flash"
 ) -> str:
     """
     Unified function for content generation
