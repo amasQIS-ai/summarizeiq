@@ -1,5 +1,7 @@
-# Exclude the virtual environment folder
+# Environment variables
+.env
+
+# Virtual environment folder
 venv/
 
-# Exclude environment variable file
-.env
+__pycache__/
