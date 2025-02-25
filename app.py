@@ -11,71 +11,95 @@ from google.genai import types
 import prompts
 from utils import summarize_common
 
+os.environ["STREAMLIT_SERVER_MAX_UPLOAD_SIZE"]="15"
 # ==============================================================
 # UI Configuration & Branding
 # ==============================================================
 st.set_page_config(
     page_title="SummarizerIQ",
     page_icon="📄",
-    layout="centered",
+    layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for Modern UIa
+# Custom CSS for Modern UI
 st.markdown(f"""
-    <style>
-    /* Main Container */
-    .main {{
-        background-color: #f8fafc;
-        padding: 2rem 1rem;
-    }}
-    
-    /* Logo Header */
-    .logo-header {{
-        display: flex;
-        align-items: center;
-        margin-bottom: 2rem;
-        padding: 1.5rem;
-        background: linear-gradient(135deg, #6366f1, #8b5cf6);
-        border-radius: 16px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }}
-    
-    /* Sidebar Styling */
-    [data-testid="stSidebar"] {{
-        background: #ffffff !important;
-        border-right: 1px solid #e2e8f0;
-    }}
-    
-    /* Button Styling */
-    .stButton>button {{
-        border-radius: 8px !important;
-        padding: 0.75rem 1.5rem !important;
-        transition: all 0.2s ease;
-    }}
-    
-    .stButton>button:hover {{
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
-    }}
-    
-    /* File Uploader */
-    [data-testid="stFileUploader"] {{
-        border: 2px dashed #cbd5e1 !important;
-        border-radius: 12px !important;
-        padding: 2rem !important;
-    }}
-    
-    /* Chat Messages */
-    .chat-message {{
-        padding: 1.25rem;
-        border-radius: 12px;
-        margin-bottom: 1rem;
-        background: white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        border: 1px solid #e2e8f0;
-    }}
-    </style>
+<style>
+            
+
+            
+/* Center the logo container */
+.logo-container {{
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 2rem 0;
+}}
+.logo-container img {{
+  width: 80px;
+  height: auto;
+}}
+
+/* Standard paragraph styling */
+p {{
+  color: #000;
+}}
+
+/* Main Container with white background */
+.main {{
+  background-color: #ffffff;
+  padding: 2rem 1rem;
+}}
+
+/* Logo Header updated to a clean white background */
+.logo-header {{
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}}
+
+/* Sidebar Styling remains white */
+[data-testid="stSidebar"] {{
+  background: #ffffff !important;
+  border-right: 1px solid #e2e8f0;
+}}
+
+/* Button Styling using green color */
+.stButton>button {{
+  background-color: #28a745 !important; /* Modern green */
+  color: #ffffff !important;
+  border: none;
+  border-radius: 8px !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}}
+.stButton>button:hover {{
+  background-color: #218838 !important; /* Darker green on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(33, 136, 56, 0.2);
+}}
+
+/* File Uploader */
+[data-testid="stFileUploader"] {{
+  border: 2px dashed #cbd5e1 !important;
+  border-radius: 12px !important;
+  padding: 2rem !important;
+}}
+
+/* Chat Messages */
+.chat-message {{
+  padding: 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}}
+</style>
+
 """, unsafe_allow_html=True)
 
 # Logo and Header
